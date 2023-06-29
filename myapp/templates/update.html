@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Register a Gallery, Library, Archive, or Museum in this Hub</h1>
+<form action="{{ url_for('update') }}" method="post">
+    <input type="hidden" name="glam_id" value="{{ glam.id }}">
+    <label for="g_type">Type of Glam:</label>
+    <select name="glam_type" id="g_type" required>
+        <option disabled selected value>...</option>
+        {% if glam.glam_type == "Galleries" %}
+        <option value="Galleries" selected>Gallery</option>
+        <option value="Libraries">Library</option>
+        <option value="Archives">Archive</option>
+        <option value="Museums">Museum</option>
+        {% elif glam.glam_type == "Libraries" %}
+        <option value="Galleries" >Gallery</option>
+        <option value="Libraries"selected>Library</option>
+        <option value="Archives">Archive</option>
+        <option value="Museums">Museum</option>
+        {% elif glam.glam_type == "Archives" %}
+        <option value="Galleries" >Gallery</option>
+        <option value="Libraries">Library</option>
+        <option value="Archives" selected>Archive</option>
+        <option value="Museums">Museum</option>
+        {% elif glam.glam_type == "Museums" %}
+        <option value="Galleries" >Gallery</option>
+        <option value="Library">Library</option>
+        <option value="Archives">Archive</option>
+        <option value="Museums" selected>Museum</option>
+        {% endif %}
+    </select><br><br>
+    <label for="g_name">Name of GLAM:</label>
+    <input type="text" name="glam_name" id="g_name" value="{{ glam.name }}" required><br><br>
+    <label for="g_date_established">Date Established:</label>
+    <input type="number" name="glam_date_established" id="g_date_established" value="{{ glam.date_established }}"><br><br>
+    <label for="g_location">Location:</label>
+    <input type="text" name="glam_location" id="g_location" value="{{ glam.location }}"><br><br>
+    <label for="g_url">Image URL:</label>
+    <input type="url" name="glam_url" id="g_url" value="{{ glam.url }}"><br>
+    <textarea name="glam_desc" cols="30" rows="10">{{ glam.description }}</textarea><br>
+    <input type="submit" value="Update!">
+</form>
+<form action="/modify" method="post">
+    <input type="hidden" name="glam_type" value="{{ glam_type }}">
+    <button type="submit" name="modify" value="Delete">Delete</button>
+  </form>
+{% endblock %}

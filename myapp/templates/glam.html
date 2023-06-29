@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+   h3 {
+        font-size: 30px;
+        font-family: "Roboto", sans-serif;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333333;
+   }
+   
+   p {
+        font-size: 18px;
+        text-align: center;
+        margin: auto;
+        color: #333333;
+        max-width: 400px;
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .image-container img {
+        max-width: 450px;
+        max-height: 450px;
+    }
+    .edit-record {
+        max-width: 250px;
+        padding: 10px;
+        margin: auto;
+        border-radius: 5px;
+        text-align: center;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+</style>
+    <h3>{{ glam.name }}</h3>
+    <div class="image-container">
+        <img src="{{glam.url}}">
+    </div>
+    
+    <p>Location: {{ glam.location }}<p>
+    <p>Date Established: {{ glam.date_established }}<p>
+    <br>
+    <p>{{ glam.description }}</p>
+    <br>
+    <div class="edit-record">
+<form action="{{ url_for('modify') }}" method="post">
+    <input type="hidden" name="glam_id" value="{{ glam.id }}">
+    <input class="btn btn-secondary" type="submit" name="modify" value="Edit"></input>
+    <input class="btn btn-danger" type="submit" name="modify" value="Delete"></input>
+</form>
+</div>
+{% endblock %}
