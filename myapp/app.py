@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from data import read_glams_by_glam_type, read_glam_by_glam_id, insert_glam, delete_glam, update_glam
+from data import *
 
 app = Flask(__name__)
 
@@ -53,7 +53,7 @@ def modify():
         # delete the record
         delete_glam(glam_id)
         # redirect user to glam list by glam type
-    return redirect(url_for('places', glam_type=request.form.get('glam_type', '')))
+    return redirect(url_for('places', glam_type=request.form.get('glam_type')))
 
 @app.route('/update', methods=['post'])
 def update():
